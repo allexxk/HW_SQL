@@ -45,3 +45,39 @@ select distinct laptop.model,price
 from laptop inner join   
      Product ON laptop.model = Product.model
 where maker = 'B'
+=======================================
+--8. Найдите производителя, выпускающего ПК, но не ПК-блокноты.
+
+select distinct maker from product
+where type = 'pc' and 
+      maker not in (select maker from product where type = 'laptop')
+=======================================
+--9. Найдите производителей ПК с процессором не менее 450 Мгц. Вывести: Maker
+
+select distinct maker from product
+inner join 
+PC on PC.model = Product.model
+where pc.speed >=450
+=======================================
+--10. Найдите модели принтеров, имеющих самую высокую цену. Вывести: model, price
+
+select model, price from printer
+where price = (select max(price) from printer)
+=======================================
+--11. Найдите среднюю скорость ПК.
+
+Select avg(speed) from pc
+=======================================
+--12. Найдите среднюю скорость ПК-блокнотов, цена которых превышает 1000 дол.
+
+select avg(speed) from laptop
+where price > 1000
+=======================================
+--13. Найдите среднюю скорость ПК, выпущенных производителем A.
+
+select avg(speed) from pc
+inner join
+Product on pc.model = Product.model
+WHERE maker = 'A'
+=======================================
+
