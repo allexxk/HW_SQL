@@ -80,4 +80,22 @@ inner join
 Product on pc.model = Product.model
 WHERE maker = 'A'
 =======================================
+--14. Найдите класс, имя и страну для кораблей из таблицы Ships, имеющих не менее 10 орудий.
+
+select ships.class, ships.name, classes.country from ships, classes
+where classes.class = ships.class and classes.numGuns >= 10
+=======================================
+--15. Найдите размеры жестких дисков, совпадающих у двух и более PC. Вывести: HD
+
+select hd from pc
+group by hd
+having count(hd) >= 2
+=======================================
+--16. Найдите пары моделей PC, имеющих одинаковые скорость и RAM. 
+В результате каждая пара указывается только один раз, т.е. (i,j), но не (j,i), 
+Порядок вывода: модель с большим номером, модель с меньшим номером, скорость и RAM.
+
+select distinct pc1.model, pc2.model, pc1.speed, pc1.ram from pc pc1, pc pc2
+where pc1.speed=pc2.speed and pc1.ram=pc2.ram and pc1.model>pc2.model
+=======================================
 
