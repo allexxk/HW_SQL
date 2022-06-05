@@ -98,4 +98,28 @@ having count(hd) >= 2
 select distinct pc1.model, pc2.model, pc1.speed, pc1.ram from pc pc1, pc pc2
 where pc1.speed=pc2.speed and pc1.ram=pc2.ram and pc1.model>pc2.model
 =======================================
+--17. Найдите модели ПК-блокнотов, скорость которых меньше скорости каждого из ПК.
+Вывести: type, model, speed
+
+select distinct type, laptop.model, speed from laptop join 
+product on product.model = laptop.model
+where speed < all (select speed from pc)
+=======================================
+--18. Найдите производителей самых дешевых цветных принтеров. Вывести: maker, price
+
+select Maker, price from printer join product on 
+product.model = printer.model
+where price = (select min(price) from printer
+               where color = 'y') and color='y'
+group by Maker,price
+
+=======================================
+--19. Для каждого производителя, имеющего модели в таблице Laptop,
+найдите средний размер экрана выпускаемых им ПК-блокнотов.
+Вывести: maker, средний размер экрана.
+
+select maker, avg(screen) from laptop 
+join product on product.model = laptop.model
+group by maker
+
 
