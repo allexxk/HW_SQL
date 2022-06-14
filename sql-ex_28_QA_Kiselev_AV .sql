@@ -122,4 +122,25 @@ select maker, avg(screen) from laptop
 join product on product.model = laptop.model
 group by maker
 
+=======================================
+--20.
+
+
+=======================================
+--21.Найдите максимальную цену ПК, выпускаемых каждым производителем, у которого есть модели в таблице PC.
+Вывести: maker, максимальная цена.
+
+select maker, max(price) from pc 
+join product on product.model = pc.model
+group by maker
+
+=======================================
+--22. Для каждого значения скорости ПК, превышающего 600 МГц, 
+определите среднюю цену ПК с такой же скоростью. Вывести: speed, средняя цена.
+
+select speed, avg(price) from pc 
+where speed > 600
+group by speed
+
+=======================================
 
